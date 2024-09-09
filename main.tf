@@ -56,16 +56,16 @@ resource "aws_iam_role_policy_attachment" "lambda_rds_snapshot_role_attachment" 
 
 # Lambda Function
 resource "aws_lambda_function" "rds_snapshot_lambda" {
-  filename         = "lambda_function.zip"  # Path to your ZIP file
+  filename         = "lambda_rds.zip"  # Path to your ZIP file
   function_name    = "rds-hourly-snapshot"
   role             = aws_iam_role.lambda_rds_snapshot_role.arn
-  handler          = "lambda_function.lambda_handler"
+  handler          = "lambda_rds.lambda_handler"
   runtime          = "python3.8"  # Specify your Python version
-  source_code_hash = filebase64sha256("lambda_function.zip")
-
+  source_code_hash = filebase64sha256("lambda_rds.zip")
+  timeout          = 600
   environment {
     variables = {
-      DB_INSTANCE_ID = "your-db-instance-id"  # Replace with your RDS instance ID
+      DB_INSTANCE_ID = "postgres"  # Replace with your RDS instance ID
     }
   }
 }
@@ -73,7 +73,8 @@ resource "aws_lambda_function" "rds_snapshot_lambda" {
 # EventBridge Rule to Trigger Lambda Every Hour
 resource "aws_cloudwatch_event_rule" "hourly_trigger" {
   name                = "HourlyRDSBackup"
-  schedule_expression = "rate(1 hour)"  # Schedule to run every hour
+ # Schedule to run every hour
+  schedule_expression = "rate(1 minute)" 
 }
 
 # Add Lambda as a Target of the EventBridge Rule
