@@ -1,3 +1,10 @@
+
+aws iam create-role \
+    --role-name AWSDataLifecycleManagerDefaultRole \
+    --assume-role-policy-document file://trust-policy.json
+
+
+
 aws dlm create-lifecycle-policy \
     --execution-role-arn arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole \
     --description "Daily EBS backup lifecycle policy at 01:00 UTC" \
