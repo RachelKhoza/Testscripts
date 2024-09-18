@@ -36,12 +36,13 @@ aws iam put-role-policy \
 
 # Step 3: Create the EBS Lifecycle Policy to Automate Backups at 01:00 UTC
 aws dlm create-lifecycle-policy \
-    --execution-role-arn arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole \
-    --description "Daily EBS backup lifecycle policy at 01:00 UTC" \
+    --execution-role-arn arn:aws:iam::992382667543:role/AWSDataLifecycleManagerDefaultRole \
+    --description "Daily EBS backup" \
     --state ENABLED \
+    --tags "Name"="Prod Jumphost Scheduler" \
     --policy-details '{
         "ResourceTypes": ["VOLUME"],
-        "TargetTags": [{"Key": "Role", "Value": "Jump"}],
+        "TargetTags": [{"Key": "Role", "Value": "jumphost"}],
         "Schedules": [{
             "Name": "DailyBackup",
             "CreateRule": {
@@ -50,6 +51,6 @@ aws dlm create-lifecycle-policy \
                 "Times": ["01:00"]
             },
             "RetainRule": {"Count": 7},
-            "TagsToAdd": [{"Key": "Snapshot", "Value": "DailyBackup"}]
+            "TagsToAdd": [{"Key": "Name", "Value": "Prod Jumphost Scheduler"}]
         }]
     }'
