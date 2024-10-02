@@ -1,0 +1,16 @@
+ Reference Http Code :
+
+URI: api/web/lists/getbytitle('ListName')/Items(ItemID)
+Header:
+{
+  "Accept": "application/json;odata=verbose",
+  "Content-Type": "application/json;odata=verbose",
+  "If-Match": "*",
+  "X-HTTP-Method": "MERGE"
+}
+
+Body:
+{'__metadata':
+        {'type':'SP.Data.FlowDEMOListItem'},
+'UserNameId':-1
+}
