@@ -4,6 +4,19 @@ resource "aws_cloudwatch_log_group" "waf_log_group" {
   retention_in_days = 14 # Retain logs for 14 days (customize based on need)
 }
 
+
+# KMS key for CloudWatch Log Group encryption
+resource "aws_kms_key" "cloudwatch_kms" {
+  description             = "KMS key for CloudWatch log group encryption"
+  deletion_window_in_days = 10
+}
+
+resource "aws_kms_alias" "cloudwatch_kms_alias" {
+  name          = "alias/cloudwatch-logs"
+  target_key_id = aws_kms_key.cloudwatch_kms.id
+}
+
+
 # Create the WAF Web ACL
 resource "aws_wafv2_web_acl" "global_web_acl" {
   name        = "global-web-acl"
