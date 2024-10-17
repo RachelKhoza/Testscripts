@@ -14,3 +14,27 @@ Body:
         {'type':'SP.Data.FlowDEMOListItem'},
 'UserNameId':-1
 }
+
+
+Power Automate Flow for Checking and Clearing Lab Room Bookings
+
+Overview
+
+This flow automates the process of checking lab room bookings, updating availability, and clearing outdated fields in a SharePoint list.
+
+Flow Setup
+
+	1.	Recurrence Trigger
+	•	Configure the flow to run at desired intervals (e.g., daily) using a Recurrence trigger.
+	2.	Get Current Date and Time
+	•	Add a Compose action with utcNow() to retrieve the current date and time. This will be used to check against booking dates.
+	3.	Get Items
+	•	Use Get Items action with an OData filter to retrieve SharePoint items where the “Booked Till” date is less than the current date (utcNow()).
+	4.	Apply to Each
+	•	Insert an Apply to each action, using the output of Get Items. This loop iterates over each outdated booking.
+	5.	Update Item
+	•	Add an Update item action inside the loop.
+	•	Status: Set to “Available”.
+	•	Clear Fields:
+	•	Date and User Fields: Set fields like Booked Till and BookedBy to null using the expression panel to clear them.
+
