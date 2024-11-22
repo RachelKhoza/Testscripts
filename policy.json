@@ -20,7 +20,10 @@
                 "route53:CreateHostedZone",
                 "route53:DeleteHostedZone",
                 "route53:ChangeResourceRecordSets",
-                "route53:ListHostedZones"
+                "route53:ListHostedZones",
+                "route53:TagResource",
+                "route53:UntagResource",
+                "route53:ListTagsForResource"
             ],
             "Resource": "*"
         },
@@ -30,7 +33,10 @@
             "Action": [
                 "elasticloadbalancing:CreateLoadBalancer",
                 "elasticloadbalancing:DeleteLoadBalancer",
-                "elasticloadbalancing:DescribeLoadBalancers"
+                "elasticloadbalancing:DescribeLoadBalancers",
+                "elasticloadbalancing:AddTags",
+                "elasticloadbalancing:RemoveTags",
+                "elasticloadbalancing:DescribeTags"
             ],
             "Resource": "*"
         },
@@ -40,7 +46,10 @@
             "Action": [
                 "lambda:CreateFunction",
                 "lambda:DeleteFunction",
-                "lambda:ListFunctions"
+                "lambda:ListFunctions",
+                "lambda:TagResource",
+                "lambda:UntagResource",
+                "lambda:ListTags"
             ],
             "Resource": "*"
         },
@@ -52,7 +61,10 @@
                 "s3:DeleteBucket",
                 "s3:PutBucketPolicy",
                 "s3:DeleteBucketPolicy",
-                "s3:ListAllMyBuckets"
+                "s3:ListAllMyBuckets",
+                "s3:PutBucketTagging",
+                "s3:GetBucketTagging",
+                "s3:DeleteBucketTagging"
             ],
             "Resource": "arn:aws:s3:::*"
         },
@@ -62,7 +74,10 @@
             "Action": [
                 "dynamodb:CreateTable",
                 "dynamodb:DeleteTable",
-                "dynamodb:ListTables"
+                "dynamodb:ListTables",
+                "dynamodb:TagResource",
+                "dynamodb:UntagResource",
+                "dynamodb:ListTagsOfResource"
             ],
             "Resource": "*"
         },
@@ -73,17 +88,25 @@
                 "ec2:CreateSecurityGroup",
                 "ec2:DeleteSecurityGroup",
                 "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:RevokeSecurityGroupIngress"
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:DescribeTags"
             ],
             "Resource": "*"
         },
         {
-            "Sid": "AllowNFSAccess",
+            "Sid": "AllowEFSAccess",
             "Effect": "Allow",
             "Action": [
                 "elasticfilesystem:CreateFileSystem",
                 "elasticfilesystem:DeleteFileSystem",
-                "elasticfilesystem:DescribeFileSystems"
+                "elasticfilesystem:DescribeFileSystems",
+                "elasticfilesystem:CreateMountTarget",
+                "elasticfilesystem:DeleteMountTarget",
+                "elasticfilesystem:TagResource",
+                "elasticfilesystem:UntagResource",
+                "elasticfilesystem:ListTagsForResource"
             ],
             "Resource": "*"
         },
@@ -93,7 +116,10 @@
             "Action": [
                 "rds:CreateDBInstance",
                 "rds:DeleteDBInstance",
-                "rds:DescribeDBInstances"
+                "rds:DescribeDBInstances",
+                "rds:AddTagsToResource",
+                "rds:RemoveTagsFromResource",
+                "rds:ListTagsForResource"
             ],
             "Resource": "*"
         },
@@ -105,7 +131,59 @@
                 "ec2:DeleteVolume",
                 "ec2:AttachVolume",
                 "ec2:DetachVolume",
-                "ec2:DescribeVolumes"
+                "ec2:DescribeVolumes",
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:DescribeTags"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowSSMActions",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:SendCommand",
+                "ssm:CancelCommand",
+                "ssm:ListCommands",
+                "ssm:GetCommandInvocation",
+                "ssm:CreateDocument",
+                "ssm:DeleteDocument",
+                "ssm:DescribeInstanceInformation",
+                "ssm:AddTagsToResource",
+                "ssm:RemoveTagsFromResource",
+                "ssm:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowSecretsManagerActions",
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:CreateSecret",
+                "secretsmanager:DeleteSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:UpdateSecret",
+                "secretsmanager:ListSecrets",
+                "secretsmanager:TagResource",
+                "secretsmanager:UntagResource",
+                "secretsmanager:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowKMSActions",
+            "Effect": "Allow",
+            "Action": [
+                "kms:CreateKey",
+                "kms:ScheduleKeyDeletion",
+                "kms:DescribeKey",
+                "kms:EnableKey",
+                "kms:DisableKey",
+                "kms:CreateAlias",
+                "kms:DeleteAlias",
+                "kms:TagResource",
+                "kms:UntagResource",
+                "kms:ListResourceTags"
             ],
             "Resource": "*"
         }
