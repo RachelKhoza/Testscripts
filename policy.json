@@ -189,3 +189,40 @@
         }
     ]
 }
+
+"Action": [
+    "ec2:Describe*",
+    "ec2:Create*",
+    "ec2:Delete*",
+    "ec2:Modify*",
+    "s3:Get*",
+    "s3:List*",
+    "s3:PutObject",
+    "s3:DeleteObject",
+    "logs:Create*",
+    "logs:Delete*",
+    "logs:Describe*",
+    "dynamodb:Get*",
+    "dynamodb:PutItem",
+    "dynamodb:DeleteItem",
+    "kms:Describe*",
+    "kms:GenerateDataKey",
+    "rds:Describe*",
+    "rds:Create*",
+    "rds:Delete*",
+    "elasticloadbalancing:Describe*",
+    "elasticloadbalancing:Create*",
+    "elasticloadbalancing:Delete*",
+    "route53:List*",
+    "route53:Get*",
+    "resource-groups:Tag*",
+    "resource-groups:Untag*",
+    "ssm:Get*",
+    "ssm:Describe*",
+    "ssm:PutParameter",
+    "secretsmanager:Get*",
+    "secretsmanager:List*",
+    "sts:Get*",
+    "wafv2:Get*",
+    "wafv2:List*"
+]
