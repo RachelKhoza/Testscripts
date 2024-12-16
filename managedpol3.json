@@ -1,0 +1,75 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:DeleteLogGroup",
+                "logs:DescribeLogGroups",
+                "logs:PutRetentionPolicy"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:CreateKey",
+                "kms:DeleteKey",
+                "kms:DescribeKey",
+                "kms:TagResource",
+                "kms:UntagResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:CreateSecret",
+                "secretsmanager:DeleteSecret",
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:ListSecrets",
+                "secretsmanager:UpdateSecret"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:CreateDocument",
+                "ssm:DeleteDocument",
+                "ssm:DescribeDocument",
+                "ssm:SendCommand",
+                "ssm:AddTagsToResource",
+                "ssm:RemoveTagsFromResource",
+                "ssm:CreateMaintenanceWindow",
+                "ssm:DeleteMaintenanceWindow",
+                "ssm:DescribeMaintenanceWindows",
+                "ssm:ListMaintenanceWindows",
+                "ssm:UpdateMaintenanceWindow",
+                "ssm:DescribeMaintenanceWindowTargets"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "wafv2:CreateWebACL",
+                "wafv2:DeleteWebACL",
+                "wafv2:GetWebACL",
+                "wafv2:UpdateWebACL",
+                "wafv2:ListWebACLs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:AssumeRole",
+                "sts:GetCallerIdentity",
+                "sts:GetSessionToken"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
