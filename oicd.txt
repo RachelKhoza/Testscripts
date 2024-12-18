@@ -1,0 +1,32 @@
+Architecture Overview
+	1.	GitHub Actions serves as the CI/CD workflow engine.
+	2.	OIDC Provider: GitHub provides OIDC tokens to authenticate workflows.
+	3.	AWS IAM Role: AWS validates OIDC tokens and issues temporary credentials.
+	4.	Temporary Credentials: These credentials are used by GitHub Actions to interact with AWS resources.
+
+Step-by-Step Guide
+
+Step 1: Configure the OIDC Provider in AWS
+	1.	Login to AWS Console:
+	•	Navigate to IAM > Identity Providers > Add Provider.
+	2.	Create OIDC Provider:
+	•	Choose OpenID Connect as the provider type.
+	•	Enter the following:
+	•	Provider URL: https://token.actions.githubusercontent.com
+	•	Audience: sts.amazonaws.com
+	3.	Save Changes:
+	•	Note the ARN of the OIDC provider for later steps.
+
+
+Step 2: Create an IAM Role for GitHub Actions
+	1.	Create the Role:
+	•	In AWS IAM, select Roles > Create Role.
+	•	Choose Web Identity as the trusted entity.
+	•	Select the OIDC provider created earlier.
+	2.	Set Trust Policy:
+Use the following trust policy to restrict access to specific GitHub repositories and workflows:
+
+Benefits of This Approach
+	•	No Hard-Coded Credentials: Credentials are dynamically obtained during the workflow.
+	•	Fine-Grained Access: IAM role policies enforce least-privilege access.
+	•	Enhanced Security: Tokens are short-lived and scoped to specific workflows.
